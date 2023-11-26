@@ -3,20 +3,18 @@ var path = require('path')
 const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
-var aylien = require("aylien_textapi");
-
-const dotenv = require('dotenv');
-dotenv.config();
 
 //Variables
 let projectData = {};
 
 // Setting up the credentials for the api
-var textApi = new aylien({
-    application_id: process.env.API_ID,
-    application_key: process.env.API_KEY
-});
-
+const formdata = new FormData();
+formdata.append("key", "33e57533718a876d1adf0ddc96133be8");
+const requestOptions = {
+  method: 'POST',
+  body: formdata,
+  redirect: 'follow'
+};
 
 // Creating an instance of the app
 const app = express()
@@ -38,14 +36,18 @@ app.get('/', function (req, res) {
 })
 
 
+
+
 app.post("/api", (req, res) => {
-  const text = req.body;
-  console.log("Request to '/api' endpoint", text);
-  textApi.sentiment(text, (error, result, remaining) => {
-    if(error) console.log(error);
-    console.log("Aylien Callback Response and Remaining requests available", result, remaining);
-    res.send(result);
-  });
+
+  const response = fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
+  .then(response => ({
+    status: response.status, 
+    body: response.json()
+  }))
+  .then(({ status, body }) => console.log(status, body))
+  .catch(error => console.log('error', error));
+  res.send(response);
 });
 
 // Setup Server
