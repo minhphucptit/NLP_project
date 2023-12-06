@@ -8,7 +8,7 @@ import './styles/form.scss';
 import './styles/results.scss';
 import './styles/footer.scss';
 
-alert("I EXIST")
+// alert("I EXIST")
 console.log("CHANGE!!");
 
 export {

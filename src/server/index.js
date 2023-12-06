@@ -1,5 +1,5 @@
 // Connect dependencies and libraries
-var path = require('path')
+const path = require('path');
 const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,17 +7,17 @@ const bodyParser = require('body-parser');
 //Variables
 let projectData = {};
 
-// Setting up the credentials for the api
-const formdata = new FormData();
-formdata.append("key", "33e57533718a876d1adf0ddc96133be8");
+//Setting up the credentials for the api
 const requestOptions = {
   method: 'POST',
-  body: formdata,
+  body: JSON.stringify({
+    key: process.env.API_KEY
+  }),
   redirect: 'follow'
 };
 
 // Creating an instance of the app
-const app = express()
+const app = express();
 
 // Configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,33 +27,28 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Initializing the production folder
-app.use(express.static('dist'))
-
+app.use(express.static('dist'));
 
 // Requests
 app.get('/', function (req, res) {
-    res.sendFile('dist/index.html')
-})
+    res.sendFile('dist/index.html');
+});
 
-
-
-
-app.post("/api", (req, res) => {
-
-  const response = fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
-  .then(response => ({
-    status: response.status, 
-    body: response.json()
-  }))
-  .then(({ status, body }) => console.log(status, body))
-  .catch(error => console.log('error', error));
-  res.send(response);
+app.post("/api", async (req, res) => {
+  try {
+    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions);
+    const data = await response.json();
+    res.send(data); // Send data back to the client
+  } catch (error) {
+    console.log('error', error);
+    res.status(500).send('Internal Server Error'); // Handle errors
+  }
 });
 
 // Setup Server
 const port = 3000;
 
-// designates what port the app will listen to for incoming requests
+// Designates what port the app will listen to for incoming requests
 app.listen(port, function () {
-    console.log(`Evalute NLP app's server listening on port ${port}!`);
+    console.log(`Evaluate NLP app's server listening on port ${port}!`);
 });
