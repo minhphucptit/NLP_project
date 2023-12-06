@@ -3,6 +3,8 @@ const path = require('path');
 const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
+const axios = require('axios');
+const FormData = require('form-data');
 
 //Variables
 let projectData = {};
@@ -34,15 +36,33 @@ app.get('/', function (req, res) {
     res.sendFile('dist/index.html');
 });
 
+
 app.post("/api", async (req, res) => {
-  try {
-    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions);
-    const data = await response.json();
-    res.send(data); // Send data back to the client
-  } catch (error) {
-    console.log('error', error);
-    res.status(500).send('Internal Server Error'); // Handle errors
-  }
+  // try {
+  //   const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions);
+  //   const data = await response.json();
+  //   res.send(data); // Send data back to the client
+  // } catch (error) {
+  //   console.log('error', error);
+  //   res.status(500).send('Internal Server Error'); // Handle errors
+  // }
+
+
+  // console.log('req', req.body.url)
+
+  const formdata = new FormData();
+  formdata.append("key", '33e57533718a876d1adf0ddc96133be8');
+  formdata.append("txt", req.body.url);
+  // formdata.append("lang", "TEXT LANGUAGE HERE");
+
+  const response = await axios.request({
+    url: "https://api.meaningcloud.com/sentiment-2.1",
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    data: formdata
+  });
+
+  res.send(response.data)
 });
 
 // Setup Server
