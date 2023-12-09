@@ -3,44 +3,6 @@
 
 A web tool/interface that allows users to run Natural Language Processing (NLP) on articles or blogs found on other websites by interacting with the NLP system of an exciting new api called (https://learn.meaningcloud.com/developer/sentiment-analysis/2.1/doc/response)
 
-
-## Table of Contents
-- [Project Summary](#project-summary)
-- [Getting Started](#getting-started)
-	- [Tools Required](#tools-required)
-	- [Installation](#installation)
-- [Development](#development)
-    - [Setting up the API](#setting-up-the-api)
-      - [Step 1: Signup for an API key](#step-1-signup-for-an-api-key)
-      - [Step 2: Install the SDK](#step-2-install-the-sdk)
-      - [Step 3: Require the SDK package](#step-3-require-the-sdk-package)
-      - [Step 4: Environment Variables](#step-4-environment-variables)
-      - [Step 5: Using the API](#step-5-using-the-api)
-    - [After the API Setup](#after-the-api-setup)
-- [Running the App](#running-the-app)
-- [Deployment](#deployment)
-- [References](#references)
-
-## Project Summary
-
-The goal of this project is to get a taste of the environments and tools that are most likely to be used in a front end role. The focus is to understand the role every tool and technology is playing in the overall architecture, but one shouldn’t feel the need to memorize the particular commands, config setups, or structure that we create here. Every company, and even every project, will have its own custom setup, but understanding the moving pieces will help to get the gist of even far more complicated projects than this one.
-
-Some of the concepts that are implemented:
-- Setting up Webpack
-- Sass styles
-- Webpack Loaders and Plugins
-- Creating layouts and page design
-- Service workers
-- Using APIs and creating requests to external urls
-
-On top of that, this project introduces the topic of Natural Language Processing. NLPs leverage machine learning and deep learning create a program that can interpret natural human speech. Systems like Alexa, Google Assistant, and many voice interaction programs are well known to us, but understanding human speech is an incredibly difficult task and requires a lot of resources to achieve. Full disclosure, this is the Wikipedia definition, but I found it to be a clear one:
-
-> Natural language processing (NLP) is a subfield of computer science, information engineering, and artificial intelligence
-concerned with the interactions between computers and human (natural) languages, in particular how to program computers to
-process and analyze large amounts of natural language data.
-
-One could spend years and get a masters degree focusing on the details of creating NLP systems and algorithms. Typically, NLP programs require far more resources than individuals have access to, but a fairly new API called Aylien has put a public facing API in front of their NLP system. It is used in this project to determine various attributes of an article or blog post.
-
 ## Getting started
 
 The starter project can be downloaded from [here](https://github.com/udacity/fend/tree/refresh-2019/projects/evaluate-news-nlp)
