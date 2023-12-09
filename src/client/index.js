@@ -1,4 +1,4 @@
-import { handleSubmitForAylien } from './js/formHandler';
+import { handleSubmit } from './js/formHandler';
 import { validateUrl } from './js/validateUrl';
 
 import './styles/main.scss';
@@ -12,6 +12,6 @@ import './styles/footer.scss';
 console.log("CHANGE!!");
 
 export {
-    handleSubmitForAylien,
+    handleSubmit,
     validateUrl
 }

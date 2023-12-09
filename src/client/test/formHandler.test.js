@@ -1,5 +1,5 @@
-import { handleSubmitForAylien } from '../js/formHandler';
+import { handleSubmit } from '../js/formHandler';
 
 test('submit test', () => {
-    expect(handleSubmitForAylien).toBeDefined();
+    expect(handleSubmit).toBeDefined();
 });

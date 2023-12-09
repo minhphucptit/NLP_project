@@ -1,20 +1,14 @@
 // Connect dependencies and libraries
-const path = require('path');
 const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
+const FormData = require('form-data');
+const axios = require('axios');
 
 //Variables
-let projectData = {};
-
-//Setting up the credentials for the api
-const requestOptions = {
-  method: 'POST',
-  body: JSON.stringify({
-    key: process.env.API_KEY
-  }),
-  redirect: 'follow'
-};
+const formdata = new FormData();
+formdata.append("key", '33e57533718a876d1adf0ddc96133be8');
+// formdata.append("value", process.API_KEY);
 
 // Creating an instance of the app
 const app = express();
@@ -36,11 +30,16 @@ app.get('/', function (req, res) {
 
 app.post("/api", async (req, res) => {
   try {
-    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions);
-    const data = await response.json();
-    res.send(data); // Send data back to the client
+    formdata.append("txt", req.body.url);
+    const response = await axios.post("https://api.meaningcloud.com/sentiment-2.1",formdata, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  
+    res.send(response.data); // Send data back to the client
   } catch (error) {
-    console.log('error', error);
+    console.error('Axios Error:', error.message);
     res.status(500).send('Internal Server Error'); // Handle errors
   }
 });

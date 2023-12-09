@@ -1,4 +1,4 @@
-function handleSubmitForAylien(event) {
+function handleSubmit(event) {
     event.preventDefault();
     const url = document.getElementById('url').value;
 
@@ -24,4 +24,4 @@ function handleSubmitForAylien(event) {
     }
 }
 
-export { handleSubmitForAylien }
+export { handleSubmit }
